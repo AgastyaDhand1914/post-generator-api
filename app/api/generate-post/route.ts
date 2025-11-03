@@ -6,6 +6,18 @@ import { RequestSchema } from "@/schemas/postSchemas";
 import { validateTextFields } from "@/lib/inputValidator";
 import type { NextRequest } from "next/server";
 
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+}
+
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders() });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const ip =
@@ -14,8 +26,7 @@ export async function POST(req: NextRequest) {
 
     if (!allowed && retryAfter) {
       logError(`Rate limit exceeded for ${ip}`);
-
-      return NextResponse.json(
+      const res = NextResponse.json(
         {
           success: false,
           error: `Rate limit exceeded. Try again in ${Math.ceil(
@@ -24,6 +35,8 @@ export async function POST(req: NextRequest) {
         },
         { status: 429 }
       );
+      Object.entries(corsHeaders()).forEach(([k, v]) => res.headers.set(k, v));
+      return res;
     }
 
     const body = await req.json();
@@ -39,18 +52,18 @@ export async function POST(req: NextRequest) {
         "goal",
         "postType",
       ]);
-    } 
-    catch (err: any) {
+    } catch (err: any) {
       logError("Validation failed", err.errors || err);
-
-      return NextResponse.json(
+      const res = NextResponse.json(
         {
           success: false,
           error: "Invalid request body.",
-          details: JSON.parse(err),
+          details: typeof err === "object" ? err : { message: String(err) },
         },
         { status: 400 }
       );
+      Object.entries(corsHeaders()).forEach(([k, v]) => res.headers.set(k, v));
+      return res;
     }
 
     const { topic, tone, platform, count = 1, audience, postType, goal } =
@@ -130,7 +143,7 @@ User input:
       parsedResponse = JSON.parse(cleanedResponse);
     } catch (err) {
       logError("Failed to parse Gemini output", err);
-      return NextResponse.json(
+      const res = NextResponse.json(
         {
           success: false,
           error: "Invalid AI response format",
@@ -138,35 +151,40 @@ User input:
         },
         { status: 500 }
       );
+      Object.entries(corsHeaders()).forEach(([k, v]) => res.headers.set(k, v));
+      return res;
     }
 
     if (parsedResponse.valid === false) {
       logError("Rejected spam or nonsensical topic");
-      return NextResponse.json(
+      const res = NextResponse.json(
         {
           success: false,
           error: parsedResponse.reason || "Invalid or nonsensical topic.",
         },
         { status: 400 }
       );
+      Object.entries(corsHeaders()).forEach(([k, v]) => res.headers.set(k, v));
+      return res;
     }
 
     const correctedInputs = parsedResponse.corrected_inputs || {};
     const ideas = parsedResponse.ideas || [];
 
-    return NextResponse.json({
+    const res = NextResponse.json({
       success: true,
       ...correctedInputs,
       ideas,
     });
-  } 
-  
-  catch (error: any) {
+    Object.entries(corsHeaders()).forEach(([k, v]) => res.headers.set(k, v));
+    return res;
+  } catch (error: any) {
     logError("Error in /api/generate-post", error);
-
-    return NextResponse.json(
+    const res = NextResponse.json(
       { success: false, error: error.message || "Internal Server Error" },
       { status: 500 }
     );
+    Object.entries(corsHeaders()).forEach(([k, v]) => res.headers.set(k, v));
+    return res;
   }
 }
