@@ -213,22 +213,21 @@ export default function HomePage() {
   "goal": "drive engagement",
   "ideas": [
     {
-      "caption": "AI in education is a hot topic, sparking both excitement & debate! 🤖 For students, it's personalized learning. For professors, it's research assistance. Let's unpack the biggest opportunities AND challenges for both. A deep dive thread! 👇 #AIinEducation #FutureofLearning #EdTech #HigherEd",
+      "caption": "AI is rapidly reshaping the academic landscape! 🎓🤖 From personalized learning paths to advanced research tools, its impact on education is undeniable. But how can we best harness its power responsibly? Let's explore the opportunities & challenges for students & professors in this thread! 👇",
       "hashtags": [
-        "AIinEducation",
-        "FutureofLearning",
-        "EdTech",
-        "HigherEd",
-        "Students",
-        "Professors",
-        "ArtificialIntelligence"
+        "#AIinEducation",
+        "#EdTech",
+        "#FutureofLearning",
+        "#HigherEd",
+        "#StudentSuccess",
+        "#ProfessorLife"
       ],
       "image_keywords": [
         "AI in classroom",
-        "student using AI",
-        "professor AI tools",
-        "futuristic education",
-        "robot teacher"
+        "student learning with AI",
+        "professor using AI tools",
+        "digital education",
+        "futuristic learning"
       ]
     }
   ]
