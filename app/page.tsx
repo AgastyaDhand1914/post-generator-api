@@ -205,13 +205,31 @@ export default function HomePage() {
             {`{
   "success": true,
   "topic": "AI in education",
+  "count": 1,
   "tone": "informative",
   "platform": "twitter",
+  "audience": "students and professors",
+  "postType": "thread",
+  "goal": "drive engagement",
   "ideas": [
     {
-      "caption": "AI is transforming classrooms!",
-      "hashtags": ["#AI", "#Education", "#EdTech"],
-      "image_keywords": ["AI classroom", "students learning", "digital education"]
+      "caption": "AI in education is a hot topic, sparking both excitement & debate! 🤖 For students, it's personalized learning. For professors, it's research assistance. Let's unpack the biggest opportunities AND challenges for both. A deep dive thread! 👇 #AIinEducation #FutureofLearning #EdTech #HigherEd",
+      "hashtags": [
+        "AIinEducation",
+        "FutureofLearning",
+        "EdTech",
+        "HigherEd",
+        "Students",
+        "Professors",
+        "ArtificialIntelligence"
+      ],
+      "image_keywords": [
+        "AI in classroom",
+        "student using AI",
+        "professor AI tools",
+        "futuristic education",
+        "robot teacher"
+      ]
     }
   ]
 }`}

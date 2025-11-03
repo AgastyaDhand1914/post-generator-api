@@ -112,6 +112,8 @@ Return only valid JSON in this format:
   ]
 }
 
+Do not include hashtags in the caption. Use relevant and trending hashtags only.
+
 Do not include markdown, code blocks, or explanations.
 
 User input:
