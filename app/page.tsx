@@ -174,7 +174,7 @@ export default function HomePage() {
     topic: "AI in education",
     tone: "informative",
     platform: "twitter",
-    count: 2
+    count: 1
   })
 })
   .then(res => res.json())
