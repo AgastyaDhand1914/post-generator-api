@@ -119,7 +119,7 @@ export default function HomePage() {
   "topic": "AI in education",
   "tone": "informative",
   "platform": "twitter",
-  "count": 2,
+  "count": 1,
   "audience": "students and professors",
   "postType": "thread",
   "goal": "drive engagement"
@@ -192,7 +192,7 @@ export default function HomePage() {
   "topic": "AI in education",
   "tone": "informative",
   "platform": "twitter",
-  "count": 2
+  "count": 1
 }'`}
               </div>
             </div>
